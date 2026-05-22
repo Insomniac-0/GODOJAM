@@ -14,6 +14,10 @@ config/name="GODOJAM"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+SaveLoad="*uid://du541dhgd3aw6"
+
 [dotnet]
 
 project/assembly_name="GODOJAM"
