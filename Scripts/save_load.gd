@@ -4,6 +4,9 @@ const SAVEFILE = "user://savefile.save"
 
 var highest_record = 0
 
+func _ready() : 
+	load_score()
+
 func save_load() :
 	var file = FileAccess.open(SAVEFILE, FileAccess.WRITE_READ)
 	file.store_32(highest_record)
