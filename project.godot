@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 SaveLoad="*uid://du541dhgd3aw6"
+SceneLoader="*uid://d1c2biepebykn"
 
 [dotnet]
 
