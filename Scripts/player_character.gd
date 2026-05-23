@@ -6,7 +6,7 @@ var world : Node3D
 @onready var input_component: InputComponent = $InputComponent
 @onready var bulletSpawn: Node3D = $MeshInstance3D/BulletSpawn
 @onready var shootTimer: Timer = $Timer
-
+@onready var rollTimer: Timer = $RollTimer
 
 @export var bullet : PackedScene
 @export var shootKnockback : float = 10
@@ -18,32 +18,46 @@ var canShoot := true
 @export var deacceleration = 1
 var angleToMouse : float = 0
 
+@export var rollForce : float = 5
+@export var rollDecay : float = 0.8
+@export var rollTime : float = 1
+var currentlyRolling := false
+
 func _ready() -> void:
 	shootTimer.wait_time = baseShootDelay
+	rollTimer.wait_time = rollTime
 
 func _process(delta: float) -> void:
-	input_component.update()
-	if (canShoot) and (input_component.shootPressed):
-		shoot_bullet()
-		camera.addTrauma(0.1)
-		canShoot = false
-		shootTimer.start()
-	look_at_cursor()
+	if (!currentlyRolling):
+		input_component.update()
+		if (canShoot) and (input_component.shootPressed):
+			shoot_bullet()
+			camera.addTrauma(0.4)
+			canShoot = false
+			shootTimer.start()
+		look_at_cursor()
+		
 	pass
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if (!currentlyRolling):
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := (transform.basis * Vector3(input_component.moveDir.x, 0, input_component.moveDir.y)).normalized()
-	if direction:
-		velocity = velocity.lerp(Vector3(direction.x * maxSpeed, velocity.y, direction.z * maxSpeed),acceleration)
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := (transform.basis * Vector3(input_component.moveDir.x, 0, input_component.moveDir.y)).normalized()
+		if direction:
+			velocity = velocity.lerp(Vector3(direction.x * maxSpeed, velocity.y, direction.z * maxSpeed),acceleration)
+			input_component.update()
+			if (input_component.rollPressed):
+				roll(direction)
+		else:
+			velocity.x = move_toward(velocity.x, 0, deacceleration)
+			velocity.z = move_toward(velocity.z, 0, deacceleration)
 	else:
-		velocity.x = move_toward(velocity.x, 0, deacceleration)
-		velocity.z = move_toward(velocity.z, 0, deacceleration)
+		velocity *= rollDecay
 
 	move_and_slide()
 
@@ -55,6 +69,12 @@ func shoot_bullet():
 	instance.setDirection(shootDirection)
 	velocity += -shootDirection * shootKnockback
 	print("BANG")
+
+func roll(direction : Vector3):
+	print("ROLLING")
+	velocity += direction * rollForce
+	currentlyRolling = true
+	rollTimer.start()
 
 func set_camera(currentCamera : Camera3D):
 	camera = currentCamera
@@ -74,3 +94,7 @@ func look_at_cursor():
 
 func _on_timer_timeout() -> void:
 	canShoot = true
+
+
+func _on_roll_timer_timeout() -> void:
+	currentlyRolling = false
