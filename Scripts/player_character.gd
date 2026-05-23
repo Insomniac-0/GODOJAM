@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 		input_component.update()
 		if (canShoot) and (input_component.shootPressed):
 			shoot_bullet()
-			camera.addTrauma(0.4)
+			camera.addTrauma(0.3)
 			canShoot = false
 			shootTimer.start()
 	look_at_cursor()

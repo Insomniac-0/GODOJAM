@@ -54,6 +54,7 @@ positionOffset = Vector3(0, 50, 48)
 mouseInfluence = 2
 mouseInfluenceThreshold = 0.0
 mouseInfluenceLerp = 3
+maxTrauma = 0.3
 
 [node name="PlayerCharacter" parent="." unique_id=628913435 instance=ExtResource("1_o6n53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1144724, 0)
