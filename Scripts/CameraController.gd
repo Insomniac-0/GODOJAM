@@ -15,13 +15,14 @@ var mouseLook := Vector3.ZERO
 @export var mouseInfluenceLerp = 5
 
 #Screenshake
-@export var decay : float = 0.8
-@export var maxShakeOffset := Vector2(100,75)
+@export var decay : float = 1
+@export var maxShakeOffset := Vector2(1,.5)
 @export var maxRoll : float = 0.1
+@export var maxTrauma : float = 0.4
 var trauma : float = 0.0
-var traumaPower : int = 2
+var traumaPower : float = 2
 var shakeOffset : Vector2 = Vector2.ZERO
-
+ 
 func _ready() -> void:
 	randomize()
 
@@ -29,7 +30,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Set Target Position
 	targetPosition = Vector3(player.position.x,0,player.position.z)
-	
+
 	# Look at mouse
 	mousePos = get_viewport().get_mouse_position()
 	mouseOffset.x = (mousePos.x/get_viewport().size.x*2)-1
@@ -46,6 +47,7 @@ func _process(delta: float) -> void:
 	# Shake the camera
 	if trauma:
 		trauma = max(trauma - decay * delta, 0)
+		trauma = min(trauma,maxTrauma)
 	
 	var amount = pow(trauma, traumaPower)
 	shakeOffset.x = maxShakeOffset.x * amount * randf_range(-1,1)
