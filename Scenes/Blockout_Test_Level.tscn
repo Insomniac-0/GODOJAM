@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dd8n5qyhkx2hs"]
+
+[ext_resource type="Material" uid="uid://3c2ltm7tyf4w" path="res://Blockout Textures/BlockOutBlack.tres" id="1_jb5cs"]
+[ext_resource type="Texture2D" uid="uid://jcji4d530lro" path="res://Blockout Textures/Light/texture_08.png" id="2_0wpwi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xworx"]
+albedo_texture = ExtResource("2_0wpwi")
+
+[node name="Node3D" type="Node3D" unique_id=863952713]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=231801613]
+transform = Transform3D(-0.20000003, 0, 0, 0, 1, 0, 0, 0, 0.19999999, 0, 0.2, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2110289343]
+transform = Transform3D(31.949343, 0, 0, 0, 2.6999998, 0, 0, 0, 17.499767, 0, -1.0949998, 3.0701349)
+size = Vector3(8, 5, 14)
+material = ExtResource("1_jb5cs")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=2122357787]
+transform = Transform3D(1.08629465e-05, 7.770346e-08, 0.49979234, -2.0404399e-07, 5.7791038, -6.3919555e-07, -0.89201415, -4.3577653e-08, -6.12448e-06, 1.4496039, -0.044773098, -5.1003833)
+operation = 2
+size = Vector3(0.90000004, 1.3000001, 1)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D/CSGBox3D/CSGBox3D2" unique_id=200490864]
+transform = Transform3D(-1.3615331e-05, 1.1210599, 1.662542e-07, 2.2130095e-07, 3.2015016e-08, 0.70945376, 2.0008323, -2.4605037e-05, -1.1030337e-07, -4.5292473, 1.0069004, 2.5038636)
+polygon = PackedVector2Array(-4.9, -5.9, -4.9, -2.2, -1.5, -2.7, -1.5, -5.6)
+material = ExtResource("1_jb5cs")
+
+[node name="RampCombiner" type="CSGCombiner3D" parent="." unique_id=2043282360]
+transform = Transform3D(-0.09842468, 0, 0, 0, 2.9802322e-08, -0.6999999, 0, 0.19999999, 5.960464e-09, 0, 0.6999999, -1.5464351)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RampCombiner" unique_id=506960221]
+transform = Transform3D(2.157836, -1.0005066e-08, 0, -6.741317e-16, 0.52639997, -3.5527137e-15, 2.7379197e-15, 0, 1, -115.83143, 66, 4.314289)
+material = SubResource("StandardMaterial3D_xworx")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="RampCombiner/CSGBox3D" unique_id=654860575]
+transform = Transform3D(0.5931879, 1.0424127e-08, 1.1175871e-08, -7.071351e-08, -4.945474e-08, 0.49999985, 5.6213225e-09, -1.0999993, -2.2479473e-08, 48.353935, 20.913544, -5.571423)
+polygon = PackedVector2Array(10.5, -6.7000003, 18.9, -2.3, 70.200005, 5.5, 81.5, -6.2000003)
+depth = 110.2

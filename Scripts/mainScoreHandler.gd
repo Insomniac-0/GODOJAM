@@ -11,4 +11,7 @@ func _on_add_score_pressed():
 
 
 func _on_save_score_pressed():
-	pass
+	if current_score > SaveLoad.highest_record :
+		SaveLoad.highest_record = current_score
+		highest_label.text = str(current_score)
+	SaveLoad.save_score()
