@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5f2n3gmyrhrn"]
 
-[ext_resource type="Script" uid="uid://drw8c878f828e" path="res://Scenes/score_scene.gd" id="1_42ghx"]
+[ext_resource type="Script" uid="uid://drw8c878f828e" path="res://Scripts/score_scene.gd" id="1_42ghx"]
 [ext_resource type="Script" uid="uid://be8qxdkmdmv03" path="res://Scripts/mainScoreHandler.gd" id="1_kinnm"]
 
 [node name="ScoreScene" type="Control" unique_id=151327355]
