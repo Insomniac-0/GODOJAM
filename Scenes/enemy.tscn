@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b7vm7obkrwuff" path="res://Scripts/enemy.gd" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://duhx3rlmuyykn" path="res://Scripts/HealthComponent.gd" id="2_1f0kj"]
+[ext_resource type="Script" uid="uid://dsg80dlm6o5r3" path="res://Scripts/StateMachine.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://dlnirmhx4v2g8" path="res://Scripts/EnemyIdle.gd" id="4_287tu"]
+[ext_resource type="Script" uid="uid://brkajucbx8xfr" path="res://EnemyCharge.gd" id="5_0830c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fwvss"]
 
@@ -33,5 +36,19 @@ script = ExtResource("2_1f0kj")
 max_health = 10.0
 metadata/_custom_type_script = "uid://duhx3rlmuyykn"
 
+[node name="StateMachine" type="Node" parent="." unique_id=1534178445]
+script = ExtResource("3_afpow")
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" unique_id=242853817]
+script = ExtResource("4_287tu")
+metadata/_custom_type_script = "uid://dlnirmhx4v2g8"
+
+[node name="EnemyCharge" type="Node" parent="StateMachine" unique_id=807602287]
+script = ExtResource("5_0830c")
+metadata/_custom_type_script = "uid://brkajucbx8xfr"
+
+[node name="WindTimer" type="Timer" parent="." unique_id=2019883385]
+
 [connection signal="health_changed" from="Health_Component" to="." method="on_health_changed"]
 [connection signal="health_depleted" from="Health_Component" to="." method="on_death"]
+[connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]

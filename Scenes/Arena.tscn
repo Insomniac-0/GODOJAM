@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cw6ieihj5u50b"]
+
+[ext_resource type="Script" uid="uid://bo8470mpc2ssv" path="res://Scripts/world.gd" id="1_4f205"]
+[ext_resource type="Script" uid="uid://jhnvys82x837" path="res://Scripts/CameraController.gd" id="2_dpcf1"]
+[ext_resource type="PackedScene" uid="uid://bdvdf3nf4hmbv" path="res://Scenes/Objects/PlayerCharacter.tscn" id="3_jhdhk"]
+[ext_resource type="PackedScene" uid="uid://l4vw8qjpagd3" path="res://Scenes/Objects/projectile.tscn" id="4_bugre"]
+[ext_resource type="PackedScene" uid="uid://cwsoq4ibop0f7" path="res://Scenes/enemy.tscn" id="5_2tw1v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o6n53"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_pijey"]
+sky_material = SubResource("ProceduralSkyMaterial_o6n53")
+
+[sub_resource type="Environment" id="Environment_53i4f"]
+background_mode = 2
+sky = SubResource("Sky_pijey")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="JerrysSexScene" type="Node3D" unique_id=293854058]
+script = ExtResource("1_4f205")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1094050581]
+environment = SubResource("Environment_53i4f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1383350209]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1179066849]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 50.169, 48.159996)
+projection = 1
+size = 15.0
+near = 0.001
+script = ExtResource("2_dpcf1")
+lerpSpeed = 5.0
+positionOffset = Vector3(0, 50, 48)
+mouseInfluence = 2
+mouseInfluenceThreshold = 0.0
+mouseInfluenceLerp = 3
+maxTrauma = 0.3
+
+[node name="PlayerCharacter" parent="." unique_id=628913435 instance=ExtResource("3_jhdhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1144724, 0)
+bullet = ExtResource("4_bugre")
+shootKnockback = 5.0
+maxSpeed = 7.0
+acceleration = 0.2
+rollForce = 20.0
+rollDecay = 0.95
+rollTime = 0.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=513804183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3151436, 0)
+
+[node name="Enemy" parent="." unique_id=151383191 instance=ExtResource("5_2tw1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.268254, 0, 10.729692)
