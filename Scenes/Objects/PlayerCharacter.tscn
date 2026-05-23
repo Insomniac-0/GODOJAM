@@ -30,6 +30,13 @@ transform = Transform3D(0.68106323, 0, 0, 0, 0.3833276, 0, 0, 0, 0.44988215, -0.
 mesh = SubResource("BoxMesh_b4iy3")
 surface_material_override/0 = SubResource("StandardMaterial3D_aeuri")
 
+[node name="BulletSpawn" type="Node3D" parent="MeshInstance3D" unique_id=872142278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
 [node name="InputComponent" type="Node" parent="." unique_id=652132833]
 script = ExtResource("2_aeuri")
 metadata/_custom_type_script = "uid://dpiwkt166xuhr"
+
+[node name="Timer" type="Timer" parent="." unique_id=1080457348]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

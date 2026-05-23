@@ -53,6 +53,7 @@ mouseInfluenceLerp = 3
 [node name="PlayerCharacter" parent="." unique_id=628913435 instance=ExtResource("1_o6n53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1144724, 0)
 bullet = ExtResource("4_gox3w")
+shootKnockback = 5.0
 maxSpeed = 7.0
 acceleration = 0.2
 
