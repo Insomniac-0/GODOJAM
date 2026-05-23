@@ -1,6 +1,7 @@
-extends CharacterBody3D
+class_name Enemy extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var healthComponent = $Health_Component
 var SPEED = 3.0
 
 func _physics_process(delta: float) -> void:
@@ -15,3 +16,12 @@ func _physics_process(delta: float) -> void:
 	
 func update_target_location(target_locaction: Vector3):
 		nav_agent.target_position = target_locaction
+
+
+func on_health_changed(old_value: float, new_value: float) -> void:
+	print("DAMAGED")
+
+
+func on_death() -> void:
+	print("Deaadasss")
+	queue_free()

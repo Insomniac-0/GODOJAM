@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bdvdf3nf4hmbv" path="res://Scenes/Objects/PlayerCharacter.tscn" id="1_o6n53"]
 [ext_resource type="Script" uid="uid://bo8470mpc2ssv" path="res://Scripts/world.gd" id="1_pijey"]
 [ext_resource type="Script" uid="uid://jhnvys82x837" path="res://Scripts/CameraController.gd" id="2_53i4f"]
-[ext_resource type="PackedScene" uid="uid://bk75wnckum68l" path="res://Scenes/bullet.tscn" id="4_gox3w"]
+[ext_resource type="PackedScene" uid="uid://l4vw8qjpagd3" path="res://Scenes/Objects/projectile.tscn" id="4_f8k3n"]
 [ext_resource type="PackedScene" uid="uid://cwsoq4ibop0f7" path="res://Scenes/enemy.tscn" id="5_f8k3n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o6n53"]
@@ -58,7 +58,7 @@ maxTrauma = 0.3
 
 [node name="PlayerCharacter" parent="." unique_id=628913435 instance=ExtResource("1_o6n53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1144724, 0)
-bullet = ExtResource("4_gox3w")
+bullet = ExtResource("4_f8k3n")
 shootKnockback = 5.0
 maxSpeed = 7.0
 acceleration = 0.2

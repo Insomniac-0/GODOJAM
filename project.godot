@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GODOJAM"
 run/main_scene="uid://dfxrftmlplha7"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
@@ -23,10 +23,6 @@ SceneLoader="*uid://d1c2biepebykn"
 [dotnet]
 
 project/assembly_name="GODOJAM"
-
-[filesystem]
-
-import/blender/enabled=false
 
 [input]
 
