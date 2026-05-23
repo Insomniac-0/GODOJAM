@@ -10,3 +10,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	get_tree().call_group("Enemies", "update_target_location", player.position)
+
+
+func add_projectile(projectile : Projectile):
+	add_child(projectile)
+	projectile.end_of_life.connect(delete_projectile)
+
+	
+func delete_projectile(projectile : Projectile):
+	projectile.queue_free()

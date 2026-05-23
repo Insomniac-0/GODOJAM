@@ -5,7 +5,7 @@ signal end_of_life(projectile: Projectile)
 @onready var area : Area3D = $Area3D
 
 @export var defaultSpeed : float = 20.0
-@export var defaultLifetime : float = 1.0
+@export var defaultLifetime : float = 0.5
 
 var moveDirection : Vector3 = Vector3.FORWARD
 var moveSpeed : float = 0.0
@@ -33,3 +33,9 @@ func set_speed(speed : float):
 	
 func set_lifetime(time : float):
 	lifetime = time
+
+func handle_collision(body: CharacterBody3D) -> void:
+	if(body.is_in_group("Enemies")):
+		body.get_child(4).take_damage(10)
+		
+		print("Collision with Enemy")

@@ -2,6 +2,7 @@ extends CharacterBody3D
 var camera : Camera3D
 var world : Node3D
 
+
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var input_component: InputComponent = $InputComponent
 @onready var bulletSpawn: Node3D = $MeshInstance3D/BulletSpawn
@@ -62,10 +63,10 @@ func _physics_process(delta: float) -> void:
 
 func shoot_bullet():
 	var shootDirection = -mesh.transform.basis.z;
-	var instance : Bullet = bullet.instantiate()
-	world.add_child(instance)
+	var instance : Projectile = bullet.instantiate()
+	world.add_projectile(instance)
 	instance.global_position = bulletSpawn.global_position
-	instance.setDirection(shootDirection)
+	instance.set_direction(shootDirection)
 	velocity += -shootDirection * shootKnockback
 	print("BANG")
 
