@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bo8470mpc2ssv" path="res://Scripts/world.gd" id="1_pijey"]
 [ext_resource type="Script" uid="uid://jhnvys82x837" path="res://Scripts/CameraController.gd" id="2_53i4f"]
 [ext_resource type="PackedScene" uid="uid://bk75wnckum68l" path="res://Scenes/bullet.tscn" id="4_gox3w"]
+[ext_resource type="PackedScene" uid="uid://cwsoq4ibop0f7" path="res://Scenes/enemy.tscn" id="5_f8k3n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o6n53"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,8 +19,6 @@ sky = SubResource("Sky_pijey")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_o6n53"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_o6n53"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pijey"]
@@ -27,6 +26,12 @@ glow_enabled = true
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_o6n53"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o6n53"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_f8k3n"]
+vertices = PackedVector3Array(-164.46078, 0.55576706, -230.74695, -164.46078, 0.55576706, 230.75305, 164.53922, 0.55576706, 230.75305, 164.53922, 0.55576706, -230.74695)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o6n53"]
 
 [node name="JerrysSexScene" type="Node3D" unique_id=293854058]
 script = ExtResource("1_pijey")
@@ -56,10 +61,6 @@ bullet = ExtResource("4_gox3w")
 maxSpeed = 7.0
 acceleration = 0.2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1983810364]
-transform = Transform3D(164.9443, 0, 0, 0, 1, 0, 0, 0, 231.22096, 0, 0, 0)
-mesh = SubResource("PlaneMesh_o6n53")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=513804183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3151436, 0)
 
@@ -82,3 +83,13 @@ shape = SubResource("WorldBoundaryShape3D_o6n53")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1237407587]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0359726, 1.1096835, 0)
 mesh = SubResource("BoxMesh_o6n53")
+
+[node name="Enemy" parent="." unique_id=151383191 instance=ExtResource("5_f8k3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.268254, 0, 10.729692)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1706694]
+navigation_mesh = SubResource("NavigationMesh_f8k3n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1983810364]
+transform = Transform3D(164.9443, 0, 0, 0, 1, 0, 0, 0, 231.22096, -0.016487122, 0.05576706, -0.025987625)
+mesh = SubResource("PlaneMesh_o6n53")
