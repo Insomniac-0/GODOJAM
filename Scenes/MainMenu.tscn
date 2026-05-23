@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cmm5x51nuyp4j"]
+
+[ext_resource type="Script" uid="uid://criav3idfypeb" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnhvo"]
+bg_color = Color(0.6, 0.8862745, 0.84705883, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tt5f1"]
+font_size = 100
+font_color = Color(0.517825, 0.40150002, 0.55, 1)
+
+[node name="MainMenu" type="CanvasLayer" unique_id=830113880]
+script = ExtResource("1_tt5f1")
+nextScene = &"uid://dfxrftmlplha7"
+
+[node name="Panel" type="Panel" parent="." unique_id=1878372197]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bnhvo")
+
+[node name="Label" type="Label" parent="." unique_id=1419962760]
+offset_left = 298.0
+offset_top = 71.0
+offset_right = 824.0
+offset_bottom = 208.0
+size_flags_horizontal = 4
+text = "SICK GAME"
+label_settings = SubResource("LabelSettings_tt5f1")
+
+[node name="Button" type="Button" parent="." unique_id=347801414]
+offset_left = 462.0
+offset_top = 326.0
+offset_right = 658.0
+offset_bottom = 408.0
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
