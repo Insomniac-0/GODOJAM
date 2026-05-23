@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bk75wnckum68l"]
+
+[ext_resource type="Script" uid="uid://bw4nrepxuu53b" path="res://Scripts/bullet.gd" id="1_xjght"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xjght"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjght"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xjght"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_oduel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycag2"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6afsh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odot3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Bullet" type="Node3D" unique_id=1338253473]
+script = ExtResource("1_xjght")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=2130728870]
+transform = Transform3D(0.39999998, 0, 0, 0, 0.39999998, 0, 0, 0, 0.39999998, 0.10716135, 0, 0.3731058)
+mesh = SubResource("SphereMesh_xjght")
+surface_material_override/0 = SubResource("StandardMaterial3D_xjght")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1766443982]
+transform = Transform3D(0.39999998, 0, 0, 0, 0.39999998, 0, 0, 0, 0.39999998, -0.12051813, 0, 0.38501182)
+mesh = SubResource("SphereMesh_xjght")
+surface_material_override/0 = SubResource("StandardMaterial3D_xjght")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=301679381]
+transform = Transform3D(5.2161724e-16, 1.9138113e-08, -0.25000003, 0.27300003, -1.9138113e-08, 3.7200727e-23, -1.1933211e-08, -0.43782902, -1.0927848e-08, -0.0030847937, 0, -0.0153591335)
+mesh = SubResource("CylinderMesh_xjght")
+surface_material_override/0 = SubResource("StandardMaterial3D_xjght")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=72502222]
+transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, -0.25, 0, 0.25, -1.0927847e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_oduel")
+surface_material_override/0 = SubResource("StandardMaterial3D_ycag2")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=352266048]
+transform = Transform3D(0.4, 0, 0, 0, 0.33877835, 0, 0, 0, 0.31462264, 0, 0, -0.404033)
+mesh = SubResource("SphereMesh_6afsh")
+surface_material_override/0 = SubResource("StandardMaterial3D_odot3")

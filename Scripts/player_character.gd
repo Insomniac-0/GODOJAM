@@ -1,0 +1,62 @@
+extends CharacterBody3D
+var camera : Camera3D
+var world : Node3D
+
+@onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var input_component: InputComponent = $InputComponent
+
+@export var bullet : PackedScene
+@export var shootKnockback : float = 10
+
+@export var maxSpeed = 5.0
+@export var acceleration = 0.5
+@export var deacceleration = 1
+var angleToMouse : float = 0
+
+func _process(delta: float) -> void:
+	input_component.update()
+	if (input_component.shootPressed):
+		shoot_bullet()
+	look_at_cursor()
+	pass
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := (transform.basis * Vector3(input_component.moveDir.x, 0, input_component.moveDir.y)).normalized()
+	if direction:
+		velocity = velocity.lerp(Vector3(direction.x * maxSpeed, velocity.y, direction.z * maxSpeed),acceleration)
+	else:
+		velocity.x = move_toward(velocity.x, 0, deacceleration)
+		velocity.z = move_toward(velocity.z, 0, deacceleration)
+
+	move_and_slide()
+
+func shoot_bullet():
+	var shootDirection = -mesh.transform.basis.z;
+	var instance : Bullet = bullet.instantiate()
+	world.add_child(instance)
+	instance.global_position = position
+	instance.setDirection(shootDirection)
+	velocity += -shootDirection * shootKnockback
+	print("BANG")
+
+func set_camera(currentCamera : Camera3D):
+	camera = currentCamera
+
+func look_at_cursor():
+	var targetPlaneMouse = Plane(Vector3(0,1,0), position.y)
+	var rayLength = 1000
+	var mousePosition = get_viewport().get_mouse_position()
+	if (camera):
+		var from = camera.project_ray_origin(mousePosition)
+		var to = from + camera.project_ray_normal(mousePosition)*rayLength
+		var cursorPositionOnPlane = targetPlaneMouse.intersects_ray(from, to)
+		
+		$MeshInstance3D.look_at(cursorPositionOnPlane,Vector3.UP,0)
+	else:
+		print("FUCK")
