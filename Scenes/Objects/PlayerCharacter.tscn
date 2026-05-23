@@ -2,36 +2,60 @@
 
 [ext_resource type="Script" uid="uid://cxchuxrl2b8yd" path="res://Scripts/player_character.gd" id="1_b4iy3"]
 [ext_resource type="Script" uid="uid://dpiwkt166xuhr" path="res://InputComponent.gd" id="2_aeuri"]
+[ext_resource type="PackedScene" uid="uid://ddedxxk7708xs" path="res://Scenes/psykik.tscn" id="2_woduj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dd20r"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dd20r"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4iy3"]
-albedo_color = Color(1, 0.05490196, 0.18039216, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_b4iy3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aeuri"]
-albedo_color = Color(0.25882354, 1, 1, 1)
 
 [node name="PlayerCharacter" type="CharacterBody3D" unique_id=628913435]
 script = ExtResource("1_b4iy3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=672285265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_dd20r")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1065222942]
-mesh = SubResource("CapsuleMesh_dd20r")
-surface_material_override/0 = SubResource("StandardMaterial3D_b4iy3")
+[node name="Psykik" parent="." unique_id=1141822211 instance=ExtResource("2_woduj")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1596300185]
-transform = Transform3D(0.68106323, 0, 0, 0, 0.3833276, 0, 0, 0, 0.44988215, -0.010614485, 0.40718317, -0.4343564)
-mesh = SubResource("BoxMesh_b4iy3")
-surface_material_override/0 = SubResource("StandardMaterial3D_aeuri")
+[node name="Skeleton3D" parent="Psykik/Armature" parent_id_path=PackedInt32Array(1141822211, 1497349236) index="0" unique_id=287463435]
+bones/1/position = Vector3(1.5143641, 3.8982873, -0.31164113)
+bones/1/rotation = Quaternion(-0.090337686, 0.7013124, -0.7013124, 0.09033767)
+bones/2/position = Vector3(-1.0744757e-06, -3.492711e-06, 1.625075e-05)
+bones/3/position = Vector3(0.6853581, 0.20981854, -1.2681906)
+bones/3/rotation = Quaternion(0.038685806, -0.7060862, 0.7060478, -0.037977386)
+bones/4/position = Vector3(-0.37563676, -1.7544695, -2.061547)
+bones/5/position = Vector3(-1.5143641, 3.8929892, 0.23048377)
+bones/5/rotation = Quaternion(0.090337686, 0.7013124, -0.7013124, -0.09033767)
+bones/6/position = Vector3(-4.1661698e-07, -9.3585655e-08, -3.202135e-08)
+bones/7/position = Vector3(-0.68535817, 0.08976412, 0.33447117)
+bones/7/rotation = Quaternion(-0.03880346, -0.7060925, 0.7060413, 0.037859734)
+bones/8/position = Vector3(0.4127946, -1.7544698, -2.0575006)
+bones/9/position = Vector3(-0.068602525, 3.5853305, -0.16901587)
+bones/9/rotation = Quaternion(0.06420895, -0.0028974854, -0.043983527, 0.9969626)
+bones/10/rotation = Quaternion(-0.07941883, 3.1495387e-10, -1.7088517e-08, 0.99684143)
+bones/11/rotation = Quaternion(-0.011288367, 0.008401781, 0.045634307, 0.99885917)
+bones/12/rotation = Quaternion(0.20516646, -0.00096346275, 0.00012099946, 0.9787267)
+bones/13/rotation = Quaternion(-0.18121946, 0.00082511123, -0.00017090056, 0.9834423)
+bones/14/rotation = Quaternion(-0.1666518, 0.23066616, -0.6564535, 0.6986338)
+bones/15/rotation = Quaternion(0.25181195, 0.5276846, -0.3344873, 0.7390927)
+bones/16/rotation = Quaternion(0.49396583, 0.037782203, 0.14632687, 0.8562468)
+bones/17/rotation = Quaternion(-0.16960222, -0.23007002, 0.6498401, 0.7042803)
+bones/18/rotation = Quaternion(0.37600696, -0.4100215, 0.34637463, 0.7553316)
+bones/19/rotation = Quaternion(0.36259675, -0.04080864, -0.107411414, 0.92483574)
+bones/20/rotation = Quaternion(0.11117386, 0.1700519, 0.9735952, -0.104091674)
+bones/21/rotation = Quaternion(-0.48338634, 3.309106e-08, 0.0046733334, 0.87539476)
+bones/22/rotation = Quaternion(-0.067700736, 0.3516708, 0.93313634, -0.031636085)
+bones/23/rotation = Quaternion(-0.44663024, 1.9179424e-08, -0.0043177507, 0.8947082)
+bones/24/position = Vector3(1.7570736, 5.5768967, -1.4048966)
+bones/25/position = Vector3(-1.7535297, 5.5768967, -1.4048966)
 
-[node name="BulletSpawn" type="Node3D" parent="MeshInstance3D" unique_id=872142278]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+[node name="Body" parent="Psykik/Armature/Skeleton3D" index="0" unique_id=779704645]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="Psykik" index="15" unique_id=1808281179]
+speed_scale = 4.0
+
+[node name="BulletSpawn" type="Node3D" parent="Psykik" unique_id=872142278]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 5, -5)
 
 [node name="InputComponent" type="Node" parent="." unique_id=652132833]
 script = ExtResource("2_aeuri")
@@ -43,3 +67,5 @@ metadata/_custom_type_script = "uid://dpiwkt166xuhr"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
+
+[editable path="Psykik"]

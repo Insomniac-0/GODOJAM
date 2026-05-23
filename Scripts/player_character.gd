@@ -2,10 +2,10 @@ extends CharacterBody3D
 var camera : Camera3D
 var world : Node3D
 
-
-@onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var anim_tree: AnimationTree = $Psykik/AnimationPlayer/AnimationTree
+@onready var mesh: Node3D = $Psykik
 @onready var input_component: InputComponent = $InputComponent
-@onready var bulletSpawn: Node3D = $MeshInstance3D/BulletSpawn
+@onready var bulletSpawn: Node3D = $Psykik/BulletSpawn
 @onready var shootTimer: Timer = $Timer
 @onready var rollTimer: Timer = $RollTimer
 
@@ -24,6 +24,9 @@ var angleToMouse : float = 0
 @export var rollTime : float = 1
 var currentlyRolling := false
 
+var shoot_time : float = 0.7917
+var shoot_timer : float = 0.0
+var shoot_anim : float = 0
 func _ready() -> void:
 	shootTimer.wait_time = baseShootDelay
 	rollTimer.wait_time = rollTime
@@ -58,7 +61,15 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, deacceleration)
 	else:
 		velocity *= rollDecay
-
+	
+	if shoot_timer > 0:
+		shoot_timer -= delta
+		shoot_anim = 1
+	else:
+		shoot_anim = 0
+		
+	anim_tree.set("parameters/Locomotion/blend_position", velocity.length())
+	anim_tree.set("parameters/UpperBodyBlend/blend_amount", shoot_anim)
 	move_and_slide()
 
 func shoot_bullet():
@@ -68,6 +79,8 @@ func shoot_bullet():
 	instance.global_position = bulletSpawn.global_position
 	instance.set_direction(shootDirection)
 	velocity += -shootDirection * shootKnockback
+	shoot_timer = shoot_time
+	
 	print("BANG")
 
 func roll(direction : Vector3):
@@ -88,7 +101,7 @@ func look_at_cursor():
 		var to = from + camera.project_ray_normal(mousePosition)*rayLength
 		var cursorPositionOnPlane = targetPlaneMouse.intersects_ray(from, to)
 		
-		$MeshInstance3D.look_at(cursorPositionOnPlane,Vector3.UP,0)
+		mesh.look_at(cursorPositionOnPlane,Vector3.UP,0)
 	else:
 		print("FUCK")
 
