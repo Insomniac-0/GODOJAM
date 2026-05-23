@@ -4,19 +4,30 @@ var world : Node3D
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var input_component: InputComponent = $InputComponent
+@onready var bulletSpawn: Node3D = $MeshInstance3D/BulletSpawn
+@onready var shootTimer: Timer = $Timer
+
 
 @export var bullet : PackedScene
 @export var shootKnockback : float = 10
+@export var baseShootDelay : float = 0.2
+var canShoot := true
 
 @export var maxSpeed = 5.0
 @export var acceleration = 0.5
 @export var deacceleration = 1
 var angleToMouse : float = 0
 
+func _ready() -> void:
+	shootTimer.wait_time = baseShootDelay
+
 func _process(delta: float) -> void:
 	input_component.update()
-	if (input_component.shootPressed):
+	if (canShoot) and (input_component.shootPressed):
 		shoot_bullet()
+		camera.addTrauma(0.1)
+		canShoot = false
+		shootTimer.start()
 	look_at_cursor()
 	pass
 
@@ -40,7 +51,7 @@ func shoot_bullet():
 	var shootDirection = -mesh.transform.basis.z;
 	var instance : Bullet = bullet.instantiate()
 	world.add_child(instance)
-	instance.global_position = position
+	instance.global_position = bulletSpawn.global_position
 	instance.setDirection(shootDirection)
 	velocity += -shootDirection * shootKnockback
 	print("BANG")
@@ -60,3 +71,6 @@ func look_at_cursor():
 		$MeshInstance3D.look_at(cursorPositionOnPlane,Vector3.UP,0)
 	else:
 		print("FUCK")
+
+func _on_timer_timeout() -> void:
+	canShoot = true
