@@ -16,16 +16,6 @@ var current_score :
 		_current_score = x
 		current_label.text = str(x)
 	
-func _on_add_score_pressed():
-	current_score += 1
-
-
-func _on_save_score_pressed():
-	if current_score > SaveLoad.highest_record :
-		SaveLoad.highest_record = current_score
-		highest_label.text = str(current_score)
-	#SaveLoad.save_score()
-
 
 func _on_add_score_button_pressed() -> void:
 	current_score += 1
@@ -36,4 +26,3 @@ func _on_save_score_button_pressed() -> void:
 	if current_score > SaveLoad.highest_record :
 		SaveLoad.highest_record = current_score
 		highest_label.text = str(current_score)
-	#SaveLoad.save_score()

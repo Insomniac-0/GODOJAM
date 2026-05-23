@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bjg73upbjp4gs"]
+
+[ext_resource type="Script" uid="uid://dywk57mqwfrqp" path="res://Scripts/SeppoTestPlayer.cs" id="1_v0iea"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v0iea"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cvnsp"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1337563048]
+script = ExtResource("1_v0iea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1772010196]
+shape = SubResource("CapsuleShape3D_v0iea")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1817670238]
+mesh = SubResource("CapsuleMesh_cvnsp")
+
+[node name="CameraHandle" type="Node3D" parent="." unique_id=4751845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 2)
+
+[node name="Camera3D" type="Camera3D" parent="CameraHandle" unique_id=1520711890]
+transform = Transform3D(1, 0, 0, 0, 0.50000006, 0.8660255, 0, -0.8660255, 0.50000006, 0, 0, 0)

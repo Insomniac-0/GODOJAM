@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://ce2hesubb77hm"]
+
+[ext_resource type="Script" uid="uid://djfr01s31k45q" path="res://Scripts/world.gd" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://bjg73upbjp4gs" path="res://Scenes/SeppoTestPlayer.tscn" id="2_go701"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a02cp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a02cp"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_go701"]
+sky_material = SubResource("ProceduralSkyMaterial_a02cp")
+
+[sub_resource type="Environment" id="Environment_5a7ea"]
+background_mode = 2
+sky = SubResource("Sky_go701")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node" unique_id=1143889996]
+script = ExtResource("1_a02cp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2116897741]
+transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, -0.43795565, 0.8981695, 0.03855273, -0.24123618, -0.07610127, -0.96747804, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1000916033]
+navigation_mesh = SubResource("NavigationMesh_a02cp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=691134863]
+environment = SubResource("Environment_5a7ea")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1223994190]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+use_collision = true
+size = Vector3(25, 0, 25)
+
+[node name="Player" parent="." unique_id=1337563048 instance=ExtResource("2_go701")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
