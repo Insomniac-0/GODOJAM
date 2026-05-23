@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 			canShoot = false
 			shootTimer.start()
 		look_at_cursor()
+		
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -49,6 +50,9 @@ func _physics_process(delta: float) -> void:
 		var direction := (transform.basis * Vector3(input_component.moveDir.x, 0, input_component.moveDir.y)).normalized()
 		if direction:
 			velocity = velocity.lerp(Vector3(direction.x * maxSpeed, velocity.y, direction.z * maxSpeed),acceleration)
+			input_component.update()
+			if (input_component.rollPressed):
+				roll(direction)
 		else:
 			velocity.x = move_toward(velocity.x, 0, deacceleration)
 			velocity.z = move_toward(velocity.z, 0, deacceleration)
@@ -65,6 +69,12 @@ func shoot_bullet():
 	instance.setDirection(shootDirection)
 	velocity += -shootDirection * shootKnockback
 	print("BANG")
+
+func roll(direction : Vector3):
+	print("ROLLING")
+	velocity += direction * rollForce
+	currentlyRolling = true
+	rollTimer.start()
 
 func set_camera(currentCamera : Camera3D):
 	camera = currentCamera
@@ -84,3 +94,7 @@ func look_at_cursor():
 
 func _on_timer_timeout() -> void:
 	canShoot = true
+
+
+func _on_roll_timer_timeout() -> void:
+	currentlyRolling = false

@@ -42,3 +42,4 @@ metadata/_custom_type_script = "uid://dpiwkt166xuhr"
 [node name="RollTimer" type="Timer" parent="." unique_id=1119145907]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
