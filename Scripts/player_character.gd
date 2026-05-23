@@ -35,8 +35,7 @@ func _process(delta: float) -> void:
 			camera.addTrauma(0.4)
 			canShoot = false
 			shootTimer.start()
-		look_at_cursor()
-		
+	look_at_cursor()
 	pass
 
 func _physics_process(delta: float) -> void:
