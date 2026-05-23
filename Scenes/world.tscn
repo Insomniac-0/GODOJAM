@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ce2hesubb77hm"]
 
-[ext_resource type="Script" uid="uid://djfr01s31k45q" path="res://Scripts/world.gd" id="1_a02cp"]
+[ext_resource type="Script" uid="uid://bo8470mpc2ssv" path="res://Scripts/world.gd" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://bjg73upbjp4gs" path="res://Scenes/SeppoTestPlayer.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://cwsoq4ibop0f7" path="res://Scenes/enemy.tscn" id="3_5a7ea"]
 
@@ -39,7 +39,7 @@ size = Vector3(25, 0, 25)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=691134863]
 environment = SubResource("Environment_5a7ea")
 
-[node name="Player" parent="." unique_id=1337563048 instance=ExtResource("2_go701")]
+[node name="PlayerCharacter" parent="." unique_id=1337563048 instance=ExtResource("2_go701")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Enemy" parent="." unique_id=151383191 instance=ExtResource("3_5a7ea")]
