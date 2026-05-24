@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bdvdf3nf4hmbv" path="res://Scenes/Objects/PlayerCharacter.tscn" id="3_jhdhk"]
 [ext_resource type="PackedScene" uid="uid://l4vw8qjpagd3" path="res://Scenes/Objects/projectile.tscn" id="4_bugre"]
 [ext_resource type="PackedScene" uid="uid://cwsoq4ibop0f7" path="res://Scenes/enemy.tscn" id="5_2tw1v"]
+[ext_resource type="PackedScene" uid="uid://cix83ctixmvu4" path="res://Scenes/spawner.tscn" id="6_dpcf1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o6n53"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,6 +19,10 @@ background_mode = 2
 sky = SubResource("Sky_pijey")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4f205"]
+vertices = PackedVector3Array(-19.5, 8.5, -25.5, -19.5, 8.5, -20.25, 19.5, 8.5, -20.25, 19.5, 8.5, -25.5, -25.5, 8.5, -19.5, -25.5, 8.5, 19.5, -20.25, 8.5, 19.5, -20.25, 8.5, -19.5, 20.5, 8.5, -19.5, 20.5, 8.5, 19.5, 25.5, 8.5, 19.5, 25.5, 8.5, -19.5, -19.25, 0, -19.25, -19.25, 0, 19.25, 19.5, 0, 19.25, 19.5, 0, -19.25, -19.5, 8.5, 20.25, -19.5, 8.5, 25.5, 19.5, 8.5, 25.5, 19.5, 8.5, 20.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(11, 10, 8), PackedInt32Array(8, 10, 9), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17)]
 
 [node name="JerrysSexScene" type="Node3D" unique_id=293854058]
 script = ExtResource("1_4f205")
@@ -40,10 +45,13 @@ positionOffset = Vector3(0, 50, 48)
 mouseInfluence = 2
 mouseInfluenceThreshold = 0.0
 mouseInfluenceLerp = 3
-maxTrauma = 0.3
+maxTrauma = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=513804183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3151436, 0)
 
 [node name="PlayerCharacter" parent="." unique_id=628913435 instance=ExtResource("3_jhdhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1144724, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4721408, 0.2614087, 0.32393253)
 bullet = ExtResource("4_bugre")
 shootKnockback = 5.0
 maxSpeed = 7.0
@@ -52,8 +60,45 @@ rollForce = 20.0
 rollDecay = 0.95
 rollTime = 0.5
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=513804183]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3151436, 0)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=86926939]
+navigation_mesh = SubResource("NavigationMesh_4f205")
 
-[node name="Enemy" parent="." unique_id=151383191 instance=ExtResource("5_2tw1v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.268254, 0, 10.729692)
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D" unique_id=751446574]
+transform = Transform3D(0, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 0, 0, 3, -23)
+use_collision = true
+size = Vector3(6, 10, 40)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D" unique_id=2098959743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 3, 0)
+use_collision = true
+size = Vector3(6, 10, 40)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D" unique_id=981326933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 3, 0)
+use_collision = true
+size = Vector3(6, 10, 40)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=252784885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(40, 1, 40)
+
+[node name="Spawner" parent="." unique_id=1891219988 instance=ExtResource("6_dpcf1")]
+enemyRef = ExtResource("5_2tw1v")
+
+[node name="SpawnDelay" parent="Spawner" index="0" unique_id=1255110713]
+wait_time = 0.2
+
+[node name="SpawnPoint" parent="Spawner" index="1" unique_id=675242787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 15)
+
+[node name="SpawnPoint3" type="Marker3D" parent="Spawner" unique_id=1079821012 groups=["SpawnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15)
+
+[node name="SpawnPoint4" type="Marker3D" parent="Spawner" unique_id=2048300143 groups=["SpawnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -15)
+
+[node name="SpawnPoint2" type="Marker3D" parent="Spawner" unique_id=1462353363 groups=["SpawnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 15)
+
+[editable path="Spawner"]

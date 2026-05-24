@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bs5fi0nd4kmir"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://criav3idfypeb" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnhvo"]
 bg_color = Color(0.6, 0.8862745, 0.84705883, 1)
@@ -11,7 +11,7 @@ font_color = Color(0.517825, 0.40150002, 0.55, 1)
 
 [node name="MainMenu" type="CanvasLayer" unique_id=830113880]
 script = ExtResource("1_tt5f1")
-nextScene = &"uid://dfxrftmlplha7"
+nextScene = &"uid://cw6ieihj5u50b"
 
 [node name="Panel" type="Panel" parent="." unique_id=1878372197]
 anchors_preset = 15

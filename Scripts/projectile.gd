@@ -37,5 +37,5 @@ func set_lifetime(time : float):
 func handle_collision(body: CharacterBody3D) -> void:
 	if(body.is_in_group("Enemies")):
 		body.get_child(4).take_damage(10)
-		
 		print("Collision with Enemy")
+		end_of_life.emit(self)

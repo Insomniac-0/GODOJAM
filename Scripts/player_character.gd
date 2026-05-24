@@ -8,6 +8,10 @@ var world : Node3D
 @onready var bulletSpawn: Node3D = $Psykik/BulletSpawn
 @onready var shootTimer: Timer = $Timer
 @onready var rollTimer: Timer = $RollTimer
+@onready var health_component: Health_Component = $Health_Component
+@onready var hp_content: ColorRect = $CanvasLayer/HPContent
+
+@export var mainMenuScene : StringName = &""
 
 @export var bullet : PackedScene
 @export var shootKnockback : float = 10
@@ -23,6 +27,8 @@ var angleToMouse : float = 0
 @export var rollDecay : float = 0.8
 @export var rollTime : float = 1
 var currentlyRolling := false
+
+@export var damageKnockback : float = 20
 
 var shoot_time : float = 0.7917
 var shoot_timer : float = 0.0
@@ -111,3 +117,24 @@ func _on_timer_timeout() -> void:
 
 func _on_roll_timer_timeout() -> void:
 	currentlyRolling = false
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("bodyu enter")
+	if(body.is_in_group("Enemies")):
+		print("damage")
+		print(body)
+		health_component.take_damage(20)
+		var impactForce : Vector3 = ((body.position - global_position).normalized()) * damageKnockback
+		velocity -= Vector3(impactForce.x, 0, impactForce.z)
+
+
+
+func _on_health_component_health_depleted() -> void:
+	SceneLoader.load_scene(mainMenuScene)
+
+
+func _on_health_component_health_changed(old_value: float, new_value: float) -> void:
+	if (new_value < old_value):
+		hp_content.scale.x = health_component.getHealthPercentage()
+		camera.addTrauma(10)

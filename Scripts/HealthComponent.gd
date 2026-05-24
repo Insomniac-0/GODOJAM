@@ -36,3 +36,6 @@ func heal(amount: float):
 		health_depleted.emit()
 		
 		
+
+func getHealthPercentage():
+	return current_health / max_health

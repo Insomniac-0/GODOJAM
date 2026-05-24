@@ -1,4 +1,5 @@
 class_name Enemy extends CharacterBody3D
+signal death(enemy : Enemy)
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var healthComponent = $Health_Component
@@ -60,7 +61,7 @@ func on_health_changed(old_value: float, new_value: float) -> void:
 
 func on_death() -> void:
 	print("Deaadasss")
-	queue_free()
+	death.emit(self)
 
 func _on_wind_timer_timeout() -> void:
 	windingUp = false
